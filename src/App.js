@@ -14,21 +14,21 @@ export const App = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  const Reload = () => {
-    setIsLoading(false)
-    fetch('https://dog.ceo/api/breeds/image/random')
-      // .then(res => res.json())
-      .then(
-        result => {
-          setIsLoading(true)
-          setDogUrl(result.message)
-        },
-        err => {
-          setIsLoading(true)
-          setError(err)
-        },
-      )
-  }
+  //   const Reload = () => {
+  //     setIsLoading(false)
+  //     fetch('https://dog.ceo/api/breeds/image/random')
+  //       .then(res => res.json())
+  //       .then(
+  //         result => {
+  //           setIsLoading(true)
+  //           setDogUrl(result.message)
+  //         },
+  //         err => {
+  //           setIsLoading(true)
+  //           setError(err)
+  //         },
+  //       )
+  //   }
 
   if (!isLoading) {
     return <div>...Loading</div>
@@ -43,7 +43,25 @@ export const App = () => {
         <body>
           <p>犬の画像を表示するサイトです</p>
           <img src={dogUrl} alt="[Dog Image]" />
-          <button onClick={() => Reload()}>Change Image</button>
+          <button
+            onClick={() => {
+              setIsLoading(false)
+              fetch('https://dog.ceo/api/breeds/image/random')
+                .then(res => res.json())
+                .then(
+                  result => {
+                    setIsLoading(true)
+                    setDogUrl(result.message)
+                  },
+                  err => {
+                    setIsLoading(true)
+                    setError(err)
+                  },
+                )
+            }}
+          >
+            Change Image
+          </button>
         </body>
       </div>
     )
