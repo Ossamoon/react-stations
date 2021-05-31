@@ -1,6 +1,6 @@
 // DO NOT DELETE
 
-import * as React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 /**
@@ -8,6 +8,10 @@ import './App.css'
  * @type {React.FC}
  */
 export const App = () => {
+  const [dogUrl, setDogUrl] = useState(
+    'https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_175.jpg',
+  )
+
   return (
     <div className="App">
       <header>
@@ -15,10 +19,7 @@ export const App = () => {
       </header>
       <body>
         <p>犬の画像を表示するサイトです</p>
-        <img
-          src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_175.jpg"
-          alt="[Dog API]"
-        />
+        <img src={dogUrl} alt="[Dog Image]" />
       </body>
     </div>
   )
