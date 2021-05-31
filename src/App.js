@@ -12,25 +12,25 @@ export const App = () => {
     'https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_175.jpg',
   )
   const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoaded, setIsLoading] = useState(true)
 
-  //   const Reload = () => {
-  //     setIsLoading(false)
-  //     fetch('https://dog.ceo/api/breeds/image/random')
-  //       .then(res => res.json())
-  //       .then(
-  //         result => {
-  //           setIsLoading(true)
-  //           setDogUrl(result.message)
-  //         },
-  //         err => {
-  //           setIsLoading(true)
-  //           setError(err)
-  //         },
-  //       )
-  //   }
+  const Reload = () => {
+    setIsLoading(false)
+    fetch('https://dog.ceo/api/breeds/image/random')
+      .then(res => res.json())
+      .then(
+        result => {
+          setIsLoading(true)
+          setDogUrl(result.message)
+        },
+        err => {
+          setIsLoading(true)
+          setError(err)
+        },
+      )
+  }
 
-  if (!isLoading) {
+  if (!isLoaded) {
     return <div>...Loading</div>
   } else if (error) {
     return <div>Error: {error.message}</div>
@@ -43,25 +43,7 @@ export const App = () => {
         <body>
           <p>犬の画像を表示するサイトです</p>
           <img src={dogUrl} alt="[Dog Image]" />
-          <button
-            onClick={() => {
-              setIsLoading(false)
-              fetch('https://dog.ceo/api/breeds/image/random')
-                .then(res => res.json())
-                .then(
-                  result => {
-                    setIsLoading(true)
-                    setDogUrl(result.message)
-                  },
-                  err => {
-                    setIsLoading(true)
-                    setError(err)
-                  },
-                )
-            }}
-          >
-            Change Image
-          </button>
+          <button onClick={() => Reload()}>Change Image</button>
         </body>
       </div>
     )
